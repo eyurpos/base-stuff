@@ -1,2 +1,1 @@
-# base-stuff
-Some basic 
+# Exercises from different cources
