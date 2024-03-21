@@ -1,0 +1,1 @@
+# Python related exercises from cources
