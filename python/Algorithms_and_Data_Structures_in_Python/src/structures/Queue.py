@@ -1,20 +1,13 @@
-# Node structure
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.next = None
-
-    def __repr__(self):
-        return str(self.data)
-    
+from Nodes import LinkedNode
+        
 # Queue structure
-class Queue:
+class Queue:    
     def __init__(self):
         self.head = None
         self.tail = None
 
     def push(self, data):
-        newEl = Node(data)
+        newEl = LinkedNode(data)
 
         if self.tail:
             self.tail.next = newEl
@@ -28,11 +21,11 @@ class Queue:
         result = None
 
         if self.head:
-            result = self.head
+            result = self.head.data
 
-            self.head =  self.head.next
+            self.head = self.head.next
 
-            if self.tail == result:
+            if self.tail.next == self.head:
                 self.tail = self.head
 
         return result       
@@ -53,3 +46,4 @@ if __name__ == '__main__':
     if queue.pop():
         print("error")
     print('-------')
+    

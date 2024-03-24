@@ -1,19 +1,12 @@
-# Node structure
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.next = None
+from Nodes import LinkedNode
 
-    def __repr__(self):
-        return str(self.data)
-    
 # Stack structure
-class Stack:
+class Stack:        
     def __init__(self):
         self.head = None
 
     def push(self, data):
-        newEl = Node(data)
+        newEl = LinkedNode(data)
 
         newEl.next = self.head
         self.head = newEl
@@ -22,10 +15,10 @@ class Stack:
         result = None
 
         if self.head:
-            result = self.head
+            result = self.head.data
             self.head =  self.head.next
 
-        return result       
+        return result   
 
 if __name__ == '__main__':
     stack = Stack()
@@ -43,3 +36,4 @@ if __name__ == '__main__':
     if stack.pop():
         print("error")
     print('-------')
+    

@@ -9,5 +9,3 @@ def reverse_integer(n):
         n = int(n/10)
         
     return result
-
-print(reverse_integer(1234))

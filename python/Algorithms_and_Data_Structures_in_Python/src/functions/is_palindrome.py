@@ -14,9 +14,3 @@ def is_palindrome(s):
     
     return True
 
-print(is_palindrome("a"))
-print(is_palindrome("aa"))
-print(is_palindrome("ab"))
-print(is_palindrome("aaabaaa"))
-print(is_palindrome("aaabbaaa"))
-print(is_palindrome("aaabcaaa"))

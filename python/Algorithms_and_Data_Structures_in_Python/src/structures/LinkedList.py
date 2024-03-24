@@ -1,20 +1,13 @@
-# Node structure
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.next = None
+from Nodes import LinkedNode
 
-    def __repr__(self):
-        return str(self.data)
-    
 # Linked List structure
-class LinkedList:
+class LinkedList:    
     def __init__(self):
         self.head = None
         self.size = 0
 
     def push_back(self, data):
-        newEl = Node(data)
+        newEl = LinkedNode(data)
 
         if not self.head:
             self.head = newEl
@@ -26,14 +19,14 @@ class LinkedList:
         self.size += 1
 
     def push_top(self, data):
-        newEl = Node(data)
+        newEl = LinkedNode(data)
 
         newEl.next = self.head
         self.head = newEl
         self.size += 1
 
     def insert(self, position, data):
-        newEl = Node(data)
+        newEl = LinkedNode(data)
 
         if self.size <= position:
             print("{} bigger actual size {}".format(position, self.size))
@@ -96,3 +89,4 @@ if __name__ == '__main__':
     linkedList.insert(2,67)
     linkedList.print()
     print('-------')
+    

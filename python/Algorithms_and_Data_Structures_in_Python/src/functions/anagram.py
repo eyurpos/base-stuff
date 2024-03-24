@@ -19,6 +19,3 @@ def is_anagram(str1, str2):
             return False
             
     return True
-
-print(is_anagram("restful", "fluster"))
-print(is_anagram("restdul", "fluster"))

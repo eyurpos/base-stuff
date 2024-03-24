@@ -1,22 +1,31 @@
-# Node structure
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.next = None
-        self.prev = None
+from Nodes import DoublyLinkedNode
 
-    def __repr__(self):
-        return str(self.data)
-    
 # Doubly Linked List structure
-class DoublyLinkedList:
+class DoublyLinkedList:    
     def __init__(self):
         self.head = None
         self.tail = None
         self.size = 0
 
+    def __find_forward_el(self, position):
+        tmp = self.head
+        while position > 0:
+            tmp = tmp.next
+            position -= 1
+
+        return tmp
+
+    def __find_backward_el(self, position):
+        tmp = self.tail
+        number = self.size-1
+        while number > position:
+            tmp = tmp.prev
+            number -= 1
+
+        return tmp
+    
     def push_back(self, data):
-        newEl = Node(data)
+        newEl = DoublyLinkedNode(data)
 
         if not self.tail:
             self.tail = newEl
@@ -28,7 +37,7 @@ class DoublyLinkedList:
         self.size += 1
 
     def push_top(self, data):
-        newEl = Node(data)
+        newEl = DoublyLinkedNode(data)
 
         if not self.head:
             self.head = newEl
@@ -40,25 +49,8 @@ class DoublyLinkedList:
 
         self.size += 1
 
-    def find_forward_el(self, position):
-        tmp = self.head
-        while position > 0:
-            tmp = tmp.next
-            position -= 1
-
-        return tmp
-
-    def find_backward_el(self, position):
-        tmp = self.tail
-        number = self.size-1
-        while number > position:
-            tmp = tmp.prev
-            number -= 1
-
-        return tmp
-
     def insert(self, position, data):
-        newEl = Node(data)
+        newEl = DoublyLinkedNode(data)
 
         if self.size <= position:
             print("{} bigger actual size {}".format(position, self.size))
@@ -72,10 +64,10 @@ class DoublyLinkedList:
         tmp = None
         if position < self.size//2:
             print(1)
-            tmp = self.find_forward_el(position)
+            tmp = self.__find_forward_el(position)
         else:
             print(2)
-            tmp = self.find_backward_el(position)
+            tmp = self.__find_backward_el(position)
 
         if not tmp:
             print ("Error")
@@ -152,3 +144,4 @@ if __name__ == '__main__':
     print('-------')
     doublyLinkedList.print_backward()
     print('-------')
+    
