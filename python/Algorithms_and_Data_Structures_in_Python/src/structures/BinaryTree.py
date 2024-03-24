@@ -5,6 +5,11 @@ class BinaryTree:
     def __init__(self):
         self.head = None
 
+    def __repr__(self):
+        result = []
+        self.__traverse(self.head, result)
+        return str(result)
+    
     def __insert_node(self, parent, newEl):
         if newEl.data > parent.data:
             if parent.right:
@@ -86,35 +91,3 @@ class BinaryTree:
     def remove(self, data):
         element = self.find(data)
         self.__remove_node(element)
-
-    def print(self):
-        result = []
-        self.__traverse(self.head, result)
-        print(result)
-
-
-if __name__ == '__main__':
-    binaryTree = BinaryTree()
-    binaryTree.insert(10)
-    binaryTree.insert(100)
-    binaryTree.insert(1000)
-    binaryTree.insert(3)
-    binaryTree.insert(1)
-    binaryTree.insert(7.5)
-    binaryTree.print()
-    print('-------')
-    binaryTree.remove(10)
-    binaryTree.print()
-    print('-------')
-    binaryTree.insert(67)
-    binaryTree.print()
-    print('-------')
-    binaryTree.remove(67)
-    binaryTree.print()
-    
-
-        
-
-
-        
-

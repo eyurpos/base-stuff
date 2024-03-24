@@ -15,6 +15,8 @@ def expect_equal(value, expected_value):
     if value == expected_value:
         print("PASS")
     else:
+        print(value)
+        print(expected_value)
         raise ValueError("Test failed")
 
 def expect_different(value, expected_value):

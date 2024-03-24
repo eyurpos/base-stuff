@@ -53,7 +53,6 @@ class DoublyLinkedList:
         newEl = DoublyLinkedNode(data)
 
         if self.size <= position:
-            print("{} bigger actual size {}".format(position, self.size))
             self.push_back(data)
             return
         
@@ -63,14 +62,11 @@ class DoublyLinkedList:
         
         tmp = None
         if position < self.size//2:
-            print(1)
             tmp = self.__find_forward_el(position)
         else:
-            print(2)
             tmp = self.__find_backward_el(position)
 
         if not tmp:
-            print ("Error")
             return
         
         newEl.next = tmp
@@ -107,41 +103,22 @@ class DoublyLinkedList:
     def size(self):
         return self.size
     
-    def print_forward(self):
-
-        print('List size {}:\n'.format(self.size))
+    def s_forward(self):
+        result = ""
         tmp = self.head
 
         while tmp is not None:
-            print(tmp)
+            result += "{} ".format(str(tmp)) 
             tmp = tmp.next
 
-    def print_backward(self):
+        return result
 
-        print('List size {}:\n'.format(self.size))
+    def s_backward(self):
+        result = ""
         tmp = self.tail
 
         while tmp is not None:
-            print(tmp)
+            result += "{} ".format(str(tmp)) 
             tmp = tmp.prev
 
-if __name__ == '__main__':
-    doublyLinkedList = DoublyLinkedList()
-    doublyLinkedList.push_back(10)
-    doublyLinkedList.push_top(100)
-    doublyLinkedList.insert(5,1000)
-    doublyLinkedList.insert(0,3)
-    doublyLinkedList.push_back('Adam')
-    doublyLinkedList.push_back(7.5)
-    doublyLinkedList.print_forward()
-    print('-------')
-    doublyLinkedList.remove(1000)
-    doublyLinkedList.print_forward()
-    print('-------')
-    doublyLinkedList.insert(1,67)
-    doublyLinkedList.insert(4,68)
-    doublyLinkedList.print_forward()
-    print('-------')
-    doublyLinkedList.print_backward()
-    print('-------')
-    
+        return result

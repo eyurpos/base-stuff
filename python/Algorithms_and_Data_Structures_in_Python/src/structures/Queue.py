@@ -28,22 +28,5 @@ class Queue:
             if self.tail.next == self.head:
                 self.tail = self.head
 
-        return result       
-
-if __name__ == '__main__':
-    queue = Queue()
-    queue.push(10)
-    queue.push(100)
-    queue.push('Adam')
-    queue.push(7.5)
-    print(queue.pop())
-    print('-------')
-    queue.push(1000)
-    print(queue.pop())
-    print(queue.pop())
-    print(queue.pop())
-    print(queue.pop())
-    if queue.pop():
-        print("error")
-    print('-------')
+        return result
     
