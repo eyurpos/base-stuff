@@ -1,11 +1,15 @@
+from enum import Enum
 from Nodes import AvlTreeNode
 from BinaryTree import BinaryTree
 
 class AvlTree (BinaryTree):
+    class Heavy(Enum):
+        RIGHT_HEAVY = -1
+        BALANCED = 0
+        LEFT_HEAVY = 1
+
     def __init__(self):
         super().__init__()
-        self.__left_heavy = 1
-        self.__right_heavy = -1
 
     def __getHeight(self, root): 
         if not root: 
@@ -23,9 +27,14 @@ class AvlTree (BinaryTree):
 
     def __getBalance(self, root): 
         if not root: 
-            return 0
-  
-        return self.__getHeight(root.left) - self.__getHeight(root.right) 
+            return self.Heavy.BALANCED
+
+        balance = self.__getHeight(root.left) - self.__getHeight(root.right)
+        if balance < -1:
+            return self.Heavy.RIGHT_HEAVY
+        elif balance > 1:
+            return self.Heavy.LEFT_HEAVY
+        return self.Heavy.BALANCED
     
   
     def __leftRotate(self, root): 
@@ -60,14 +69,14 @@ class AvlTree (BinaryTree):
 
         balance = self.__getBalance(parent)
 
-        if balance > self.__left_heavy and data < parent.left.data:
+        if balance == self.Heavy.LEFT_HEAVY and data < parent.left.data:
             return self.__rightRotate(parent)
-        if balance < self.__right_heavy and data > parent.right.data:
+        if balance == self.Heavy.RIGHT_HEAVY and data > parent.right.data:
             return self.__leftRotate(parent)
-        if balance > self.__left_heavy and data > parent.left.data:
+        if balance == self.Heavy.LEFT_HEAVY and data > parent.left.data:
             parent.left = self.__leftRotate(parent.left)
             return self.__rightRotate(parent)
-        if balance < self.__right_heavy and data < parent.right.data:
+        if balance == self.Heavy.RIGHT_HEAVY and data < parent.right.data:
             parent.right = self.__rightRotate(parent.right)
             return self.__leftRotate(parent)
         
@@ -119,8 +128,10 @@ class AvlTree (BinaryTree):
  
         return self.__balance(parent, data)
 
+
     def insert(self, data):
         self.head = self.__insert_node(self.head, data)
+
 
     def remove(self, data):
         self.head = self.__remove_node(self.head, data)
