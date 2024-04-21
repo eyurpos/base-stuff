@@ -7,7 +7,7 @@ class BinaryTree:
 
     def __repr__(self):
         result = []
-        self.__traverse(self.head, result)
+        self._traverse(self.head, result)
         return str(result)
     
     def __insert_node(self, parent, newEl):
@@ -44,7 +44,7 @@ class BinaryTree:
         if not element:
             return None
         
-        childNum =  element.get_child_num()
+        childNum =  self.__get_child_num(element)
         newChild = None
         parent = element.parent
         
@@ -54,29 +54,66 @@ class BinaryTree:
             else:
                 newChild = element.left
         elif childNum == 2:
-            mostRightCihild = element.left.find_most_right_node()
+            mostRightCihild = self._find_most_right_child(element.left)
             element.data = mostRightCihild.data
             self.__remove_node(mostRightCihild)
             return self
 
         if parent:
-            parent.change_child(element, newChild)
+            self.__change_child(parent, element, newChild)
         else:
             self.head = newChild
 
         if newChild:
             newChild.parent = parent
 
-    def __traverse(self, element, result):
+    def _traverse(self, element, result):
         if element:
             if element.left:
-                self.__traverse(element.left, result)
+                self._traverse(element.left, result)
 
             result.append(element.data)
 
             if element.right:
-                self.__traverse(element.right, result)
-    
+                self._traverse(element.right, result)
+
+    def __get_child_num(self, element):
+        if not element:
+            raise ValueError
+        
+        if (element.right is not None) and (element.left is not None):
+            return 2
+        elif (element.right is not None) | (element.left is not None):
+            return 1
+        else:
+            return 0
+
+    def __change_child(self, parent, oldChild, newChild):
+        if not parent:
+            raise ValueError
+        
+        if parent.left == oldChild:
+            parent.left = newChild
+        elif parent.right ==  oldChild:
+            parent.right = newChild
+        else:
+            raise ValueError
+
+    def _find_most_right_child(self, root):
+        if not root:
+            raise ValueError
+        
+        if root.right:
+            return self._find_most_right_child(root.right)
+        
+        return root
+
+    def _find_most_left_child(self, root):
+        if root is None or root.left is None:
+            return root
+ 
+        return self._find_most_left_child(root.left)
+       
     def insert(self, data):
         newEl = BinaryTreeNode(data)
 

@@ -1,48 +1,33 @@
-# Node structure
-class LinkedNode:
+# Base Node structure
+class Node:
     def __init__(self, data):
         self.data = data
-        self.next = None
 
     def __repr__(self):
         return str(self.data)
     
-# Node structure
+# Linked Node structure
+class LinkedNode (Node):
+    def __init__(self, data):
+        super().__init__(data)
+        self.next = None
+    
+# Doubly Linked Node structure
 class DoublyLinkedNode (LinkedNode):
     def __init__(self, data):
-        self.data = data
-        self.next = None
+        super().__init__(data)
         self.prev = None
 
-# Node structure
-class BinaryTreeNode (LinkedNode):
+# Binary Tree Node structure
+class BinaryTreeNode (Node):
     def __init__(self, data):
-        self.data = data
+        super().__init__(data)
         self.parent = None
         self.left = None
         self.right = None
-
-    def get_child_num(self):
-        if (self.right is not None) and (self.left is not None):
-            return 2
-        elif (self.right is not None) | (self.left is not None):
-            return 1
-        else:
-            return 0
-        
-    def change_child(self, oldChild, newChild):
-        if self.left == oldChild:
-            self.left = newChild
-        elif self.right ==  oldChild:
-            self.right = newChild
-        else:
-            return
-
-    def find_most_right_node(self):
-        if self.right:
-            return self.right.find_most_right_node()
-        
-        return self
     
-    def __repr__(self):
-        return str(self.data)
+# AVL Tree Node structure
+class AvlTreeNode (BinaryTreeNode):
+    def __init__(self, data):
+        super().__init__(data)
+        self.height = 1
